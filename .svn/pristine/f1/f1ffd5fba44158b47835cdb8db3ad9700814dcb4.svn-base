@@ -1,0 +1,195 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using MyVariable;
+
+namespace Clipbrd_Plus
+{
+    /// <summary>
+    /// history.xaml 的交互逻辑
+    /// </summary>
+    public partial class history : Window
+    {
+        public ObservableCollection<HistoryInfo> HistoryList = new ObservableCollection<HistoryInfo>()
+        {
+            // new HistoryInfo("1","TEXT","3","4","0","TEST"),
+        };
+        public history()
+        {
+            InitializeComponent();
+
+            this.HistoryListView.ItemsSource = HistoryList;
+            LoadData();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //设置窗口样式
+            if (MyVariable.Variable.TempLoadedHistory == true)
+            {
+                this.HistoryBar.Visibility = Visibility.Hidden;
+                Thickness MyThickness = new Thickness
+                {
+                    Top = 10
+                };
+
+                this.BodyGrid.Margin = MyThickness;
+            }
+
+            MyVariable.Variable.HistoryLoaded = true;
+        }
+
+
+        //程序关闭时的操作
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MyVariable.Variable.TempLoadedHistory = false;
+            MyVariable.Variable.HistoryLoaded = false;
+        }
+
+
+        //关闭窗口按钮被单击
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        //允许窗口被拖动
+        private void HistoryBar_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+
+        //在临时打开历史记录窗口后鼠标移开则关闭窗口
+
+        private void Window_MouseLeave(object sender, MouseEventArgs e)
+        {
+            PublicFunction.FindCloseWindow("history");
+        }
+
+
+        public void LoadData()
+        {
+            string sqltext = "SELECT * FROM history";
+            ExecuteQuery(sqltext);
+        }
+
+        public void ExecuteQuery(string sql)
+        {
+            if (HistoryListView.Items.Count > 0)
+            {
+                this.HistoryListView.ItemsSource = null;
+                HistoryList.Clear();
+            }
+            this.HistoryListView.ItemsSource = HistoryList;
+
+           PublicFunction. Open(PublicFunction.SqLiteConnection);
+            using (var tr = PublicFunction.SqLiteConnection.BeginTransaction())
+            {
+                using (var command = PublicFunction.SqLiteConnection.CreateCommand())
+                {
+                    command.CommandText = sql;
+                    //执行查询语句返回SQLiteDataReader对象
+                    var reader = command.ExecuteReader();
+
+
+                    //reader.Read()方法会从读出一行匹配的数据到reader中。注意:是一行数据。
+                    while (reader.Read())
+                    {
+                        // 有一系列的Get方法，方法的参数是列数。意思是获取第n列的数据，转成Type返回。
+                        // 比如这里的语句，意思就是：获取第0列的数据，转成int值返回。
+                        // var temp = reader.GetInt32(0);
+
+                        string id = reader.GetInt32(0).ToString();
+                        string type = reader.GetString(1);
+                        dynamic tempBytes;
+                        try
+                        {
+                            tempBytes = reader.GetString(2);
+                        }
+                        catch (Exception e)
+                        {
+                            tempBytes = "";
+                        }
+
+                        string data;
+                        switch (type)
+                        {
+                            case "TEXT":
+                                data =PublicFunction.SqlRebuild(tempBytes);
+                                break;
+                            case "IMG":
+                                data = PublicFunction.SqlRebuild(tempBytes);
+                                break;
+                            case "FILE":
+                                data = PublicFunction.SqlRebuild(tempBytes);
+                                break;
+                            default:
+                                data = "Byte|" + tempBytes.GetType().ToString();
+                                break;
+                        }
+
+                        string time = Convert.ToDateTime(reader.GetString(3)).ToString();
+
+                        // dynamic temp = reader.GetInt32(4);
+                        //  MessageBox.Show(temp.ToString());
+                        string locked = reader.GetString(4);
+                        string note = reader.GetString(5);
+
+
+                        HistoryList.Add(new HistoryInfo(id, type, data, time, locked, note));
+
+
+                        // MessageBox.Show(note);
+                        // ListView myListView = new ListView();
+
+                    }
+
+
+                }
+
+                tr.Commit();
+
+            }
+        }
+
+        public class HistoryInfo
+        {
+            public string Note { get; set; }
+
+            public string Locked { get; set; }
+
+            public string Time { get; set; }
+
+            public string Data { get; set; }
+
+            public string Type { get; set; }
+
+            public string Id { get; set; }
+
+            public HistoryInfo(string id, string type, string data, string time, string Lock, string note)
+            {
+                Id = id;
+                Type = type;
+                Data = data;
+                Time = time;
+                Locked = Lock;
+                Note = note;
+            }
+
+
+        }
+    }
+}

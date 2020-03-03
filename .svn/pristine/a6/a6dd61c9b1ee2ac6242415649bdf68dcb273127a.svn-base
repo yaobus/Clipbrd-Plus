@@ -1,0 +1,146 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
+using System.Linq;
+using System.Media;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Forms;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using MyVariable;
+using Application = System.Windows.Application;
+using MessageBox = System.Windows.MessageBox;
+using UserControl = System.Windows.Controls.UserControl;
+
+
+namespace Clipbrd_Plus
+{
+    /// <summary>
+    /// gensetting.xaml 的交互逻辑
+    /// </summary>
+    public partial class Gensetting : UserControl
+    {
+        public Gensetting()
+        {
+            InitializeComponent();
+
+
+
+            CbStaringRun.IsChecked = ClipBoardSet.Default.StartUp;
+            CbPlayVoice.IsChecked = ClipBoardSet.Default.PlayVoice;
+
+            if (ClipBoardSet.Default.VoicePath != "" && ClipBoardSet.Default.VoicePath != null)
+            {
+                TbVoicePath.Text = ClipBoardSet.Default.VoicePath;
+            }
+            else
+            {
+                TbVoicePath.Text = Directory.GetCurrentDirectory() + @"\sounds\lovely.wav";
+                ClipBoardSet.Default.VoicePath = TbVoicePath.Text;
+            }
+
+
+            TbHistoryNumber.Text = ClipBoardSet.Default.HistoryNumber.ToString();
+            //  MessageBox.Show(ClipBoardSet.Default.HistoryNumber.ToString());
+            LanguageList.SelectedIndex = ClipBoardSet.Default.LanguageIndex;
+            PublicFunction.LanguageShow(LanguageList.SelectedIndex);
+        }
+
+
+
+
+
+        //语言选择框中语言被改变后，重载UI语言
+        private void LanguageList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            ClipBoardSet.Default.LanguageIndex = LanguageList.SelectedIndex;
+            ClipBoardSet.Default.Save();
+
+            int index = LanguageList.SelectedIndex;
+
+            PublicFunction.LanguageShow(index);
+
+
+        }
+
+        //重启应用程序
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.Application.Restart();
+
+            Environment.Exit(0);
+        }
+
+        //修改并保存程序的开机自启动选项
+        private void CbStaringRun_OnClick(object sender, RoutedEventArgs e)
+        {
+            ClipBoardSet.Default.StartUp = Convert.ToBoolean(CbStaringRun.IsChecked);
+            ClipBoardSet.Default.Save();//保存配置
+        }
+
+        //修改并保存程序的提示音播放选项
+        private void CbPlayVoice_OnClick(object sender, RoutedEventArgs e)
+        {
+            ClipBoardSet.Default.PlayVoice = Convert.ToBoolean(CbPlayVoice.IsChecked);
+            ClipBoardSet.Default.VoicePath = TbVoicePath.Text;
+            ClipBoardSet.Default.Save();//保存配置
+        }
+
+        //浏览提示音
+        private void BrowseVoice_OnClick(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFile = new OpenFileDialog();
+            openFile.InitialDirectory = Directory.GetCurrentDirectory() + @"\sounds\";
+
+            openFile.Filter = "声音文件(*.wav)|*.wav";
+
+            openFile.ShowDialog();
+            string path = openFile.FileName;
+
+
+            if (path != null && path != "")
+            {
+
+                TbVoicePath.Text = path;
+                ClipBoardSet.Default.VoicePath = TbVoicePath.Text;
+                ClipBoardSet.Default.Save();//保存配置
+            }
+
+        }
+
+        //试听提示音
+        private void BtListen_OnClick(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                SoundPlayer spPlayer = new SoundPlayer(TbVoicePath.Text);
+                spPlayer.Play();
+            }
+            catch (Exception exception)
+            {
+
+            }
+
+
+
+
+        }
+
+        //历史记录数量被修改后设置
+        private void TbHistoryNumber_OnTextChanged(object sender, TextChangedEventArgs e)
+        {
+            ClipBoardSet.Default.HistoryNumber = Convert.ToInt32(TbHistoryNumber.Text);
+            ClipBoardSet.Default.Save();//保存配置
+        }
+    }
+}

@@ -1,0 +1,465 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using NHotkey;
+using Application = System.Windows.Application;
+using KeyEventArgs = System.Windows.Forms.KeyEventArgs;
+using NHotkey.Wpf;
+
+
+namespace Clipbrd_Plus
+{
+    class PublicFuncition
+    {
+        //获取屏幕宽度
+        public static int GetScreenWidth()
+        {
+            int x = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Size.Width;
+            return x;
+        }
+
+        //获取屏幕高度
+        public static int GetScreenHeight()
+        {
+            int x = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Size.Height;
+            return x;
+        }
+
+
+
+
+
+        /// <summary>
+        /// 通过查找窗口标题关闭窗口
+        /// </summary>
+        /// <param name="name">窗口标题</param>
+
+        //通过指定关键字查询并关闭窗口
+        public static void FindCloseWindow(string name)
+        {
+            if (MyVariable.Variable.TempLoadedHistory == true)
+            {
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.Title == name)
+                    {
+                        //window.ShowInTaskbar = false;
+                        window.Close();
+                    }
+
+                }
+            }
+        }
+
+
+
+        /// <summary>
+        /// 设置程序显示语言
+        /// </summary>
+        /// <param name="LanguageTag">程序中已包含的语言字典名称，例如zh-CN</param>
+        //设置语言
+        public static void SetLanguage(string LanguageTag)
+        {
+            List<ResourceDictionary> dictionaryList = new List<ResourceDictionary>();
+            foreach (ResourceDictionary dictionary in Application.Current.Resources.MergedDictionaries)
+            {
+                dictionaryList.Add(dictionary);
+            }
+
+            string requestedCulture = string.Format(@"Language\{0}.xaml", LanguageTag);
+
+            Uri reUri = new Uri(requestedCulture, UriKind.Relative);
+            ResourceDictionary rdDictionary = (ResourceDictionary)Application.LoadComponent(reUri);
+            Application.Current.Resources.MergedDictionaries.Remove(rdDictionary);
+            Application.Current.Resources.MergedDictionaries.Add(rdDictionary);
+
+
+
+        }
+
+        //应用语言显示设置
+        /// <summary>
+        /// 设置要显示的语言索引,用于设置页面中的语言下拉框
+        /// </summary>
+        /// <param name="num">0为zh-CN,1为en-US</param>
+        public static void LanguageShow(int num)
+        {
+            switch (num)
+            {
+                case 0:
+                    PublicFuncition.SetLanguage("zh-CN");
+                    break;
+                case 1:
+                    PublicFuncition.SetLanguage("en-US");
+                    break;
+            }
+        }
+
+
+
+
+
+        //修改配置
+        public static void ReviseConfig(string key, string value)
+        {
+            //Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            //configuration.AppSettings.Settings[key].Value = value;
+            //configuration.Save();
+        }
+
+
+        //将按下的快捷键转换成通俗易懂的形式
+        public static string ShowHotKey(System.Windows.Input.KeyEventArgs e)
+        {
+            int keynum = Convert.ToInt32(Keyboard.Modifiers);
+            string tempKey;
+            if (keynum != 0)
+            {
+                switch (keynum)
+                {
+                    case 1:
+                        tempKey = "Alt";
+                        break;
+                    case 2:
+                        tempKey = "Ctrl";
+                        break;
+                    case 3:
+                        tempKey = "Ctrl+Alt";
+                        break;
+                    case 4:
+                        tempKey = "Shift";
+                        break;
+                    case 5:
+                        tempKey = "Shift+Alt";
+                        break;
+                    case 6:
+                        tempKey = "Ctrl+Shift";
+                        break;
+                    case 7:
+                        tempKey = "Ctrl+Shift+Alt";
+                        break;
+                    default:
+                        tempKey = null;
+                        break;
+                }
+
+                int ekeynum = Convert.ToInt32(e.Key);
+
+                if ((ekeynum < 116 || ekeynum > 121) && ekeynum != 156)
+                {
+                    tempKey = tempKey + "+" + e.Key.ToString();
+                    MyVariable.Variable.HotKeyCode = keynum.ToString() + ekeynum.ToString();
+                    return tempKey;
+                }
+                else
+                {
+                    MyVariable.Variable.HotKeyCode = null;
+                    return null;
+                }
+            }
+            else
+            {
+                MyVariable.Variable.HotKeyCode = null;
+                return null;
+            }
+
+
+        }
+
+
+        /// <summary>
+        /// 通过文本注册到快捷键
+        /// </summary>
+        /// <param name="TempKey">快捷键文本,例如Ctrl+D1|2D1,Ctrl为2,D1为键盘横排数字1</param>
+        /// <param name="hotKeyTag">快捷键全局唯一标示符,不可重复</param>
+        //注册快捷键
+        public static void RegHotKey(string TempKey, string hotKeyTag)
+        {
+            if (TempKey != null)
+            {
+                int index = TempKey.IndexOf("|");
+                if (index > -1)
+                {
+                    string tmpKey = TempKey.Substring(index + 1, TempKey.Length - index - 1);
+
+                    int mymodcode = Convert.ToInt32(tmpKey.Substring(0, 1));
+
+                    string mykeycode = tmpKey.Substring(1, tmpKey.Length - 1);
+
+                    int keyText = Convert.ToInt32(mykeycode);
+                    Key keys = (Key)keyText;
+
+                    switch (mymodcode)
+                    {
+                        case 1:
+                            try
+                            {
+                                HotkeyManager.Current.AddOrReplace(hotKeyTag, keys, ModifierKeys.Alt, ResponseHotkey);
+                                // return true;
+                            }
+                            catch (Exception e)
+                            {
+                                MessageBox.Show(e.Message);
+                                //  return false;
+                            }
+
+                            break;
+
+                        case 2:
+                            try
+                            {
+                                HotkeyManager.Current.AddOrReplace(hotKeyTag, keys, ModifierKeys.Control, ResponseHotkey);
+                                // return true;
+                            }
+                            catch (Exception e)
+                            {
+                                MessageBox.Show(e.Message);
+                                // return false;
+                            }
+
+                            break;
+                        case 3:
+                            try
+                            {
+                                HotkeyManager.Current.AddOrReplace(hotKeyTag, keys, ModifierKeys.Control | ModifierKeys.Alt, ResponseHotkey);
+                                // return true;
+                            }
+                            catch (Exception e)
+                            {
+                                MessageBox.Show(e.Message);
+                                //  return false;
+                            }
+
+                            break;
+                        case 4:
+
+                            try
+                            {
+                                HotkeyManager.Current.AddOrReplace(hotKeyTag, keys, ModifierKeys.Shift, ResponseHotkey);
+                                //  return true;
+                            }
+                            catch (Exception e)
+                            {
+                                MessageBox.Show(e.Message);
+                                //  return false;
+                            }
+                            break;
+                        case 5:
+                            try
+                            {
+                                HotkeyManager.Current.AddOrReplace(hotKeyTag, keys, ModifierKeys.Shift | ModifierKeys.Alt, ResponseHotkey);
+                                //  return true;
+                            }
+                            catch (Exception e)
+                            {
+                                MessageBox.Show(e.Message);
+                                //  return false;
+                            }
+
+                            break;
+                        case 6:
+                            try
+                            {
+                                HotkeyManager.Current.AddOrReplace(hotKeyTag, keys, ModifierKeys.Control | ModifierKeys.Shift, ResponseHotkey);
+                                // return true;
+                            }
+                            catch (Exception e)
+                            {
+                                MessageBox.Show(e.Message);
+                                //  return false;
+                            }
+
+                            break;
+                        case 7:
+                            try
+                            {
+                                HotkeyManager.Current.AddOrReplace(hotKeyTag, keys, ModifierKeys.Control | ModifierKeys.Shift | ModifierKeys.Alt, ResponseHotkey);
+                                // return true;
+                            }
+                            catch (Exception e)
+                            {
+                                MessageBox.Show(e.Message);
+                                // return false;
+                            }
+                            break;
+
+
+
+                    }
+
+
+                }
+
+
+
+
+            }
+
+
+
+
+
+        }
+
+
+
+
+
+        /// <summary>
+        /// 文本转key,返回一个Key值(键盘按键)
+        /// </summary>
+        /// <param name="str">Key 文本代码</param>
+        /// <returns></returns>
+        public static Key Text2Key(string str)
+        {
+            if (str != null)
+            {
+                int index = str.IndexOf("|");
+                string key1 = str.Substring(index + 2, str.Length - index - 2);
+                int keyText = Convert.ToInt32(key1);
+                Key keys = (Key)keyText;
+                return keys;
+            }
+
+            return Key.None;
+
+        }
+
+        public static void ResponseHotkey(Object sender, HotkeyEventArgs e)
+        {
+            switch (e.Name)
+            {
+                case "CBP_ShowSet":
+                   ShowSetting();//显示设置页面
+                    break;
+
+                case "CBP_ShowHistory":
+                    ShowHistoryCenter();//显示历史记录页面
+                    break;
+
+                case "CBP_ShowLastOne":
+                    MessageBox.Show("CBP_last_one");
+                    break;
+
+                case "CBP_ShowLastOnePaste":
+                    MessageBox.Show("CBP_Last_paste");
+                    break;
+
+                case "CBP_ShowNextOne":
+                    MessageBox.Show("CBP_NEXT");
+                    break;
+
+                case "CBP_ShowNextOnePaste":
+                    MessageBox.Show("CBP_NEXT_paste");
+                    break;
+
+                case "CBP_PasteToWindow":
+                    MessageBox.Show("CBP_p2win");
+                    break;
+
+                case "CBP_ShowHide":
+                    MessageBox.Show("CBP_hide");
+                    break;
+
+
+            }
+        }
+
+
+        public static void ShowSetting()
+        {
+            if (MyVariable.Variable.SettingLoaded == true)
+            {
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.Title is "Clipboard Plus Setting")
+                    {
+                        window.Activate();
+                    }
+                }
+            }
+            else
+            {
+                Window settingWindow = new MainWindow();
+                settingWindow.Show();
+                MyVariable.Variable.SettingLoaded = true;
+            }
+
+
+
+
+        }
+
+
+
+        //在屏幕中间显示历史记录窗口
+       public static void ShowHistoryCenter()
+        {
+            if (MyVariable.Variable.HistoryLoaded == true)
+            {
+
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.Title is "history")
+                    {
+                        window.ShowInTaskbar = true;
+                        window.Activate();
+                    }
+
+                }
+            }
+            else
+            {
+                Window historyWindow = new history();
+
+                historyWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                historyWindow.ShowInTaskbar = true;
+                historyWindow.Show();
+
+                //MyVariable.Variable.HistoryLoaded = true;
+            }
+        }
+
+
+       // 在鼠标旁边上方显示历史记录窗口
+       public  static  void ShowHistory(double x, double y)
+       {
+           if (MyVariable.Variable.HistoryLoaded == true)
+           {
+
+               foreach (Window window in Application.Current.Windows)
+               {
+                   if (window.Title is "history")
+                   {
+                       window.ShowInTaskbar = false;
+                       window.Activate();
+
+                   }
+
+               }
+           }
+           else
+           {
+               Window historyWindow = new history
+               {
+                   WindowStartupLocation = WindowStartupLocation.Manual
+               };
+               historyWindow.Left = x - historyWindow.Width;
+               historyWindow.Top = y - historyWindow.Height;
+               historyWindow.ShowInTaskbar = false;
+               historyWindow.Show();
+               MyVariable.Variable.TempLoadedHistory = true;
+
+           }
+
+
+       }
+    }
+}

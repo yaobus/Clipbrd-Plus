@@ -1,0 +1,47 @@
+D:\CloudStation\C#\Clipbrd Plus\bin\Debug\Clipbrd Plus.exe.config
+D:\CloudStation\C#\Clipbrd Plus\bin\Debug\Clipbrd Plus.exe.manifest
+D:\CloudStation\C#\Clipbrd Plus\bin\Debug\Clipbrd Plus.application
+D:\CloudStation\C#\Clipbrd Plus\bin\Debug\Clipbrd Plus.exe
+D:\CloudStation\C#\Clipbrd Plus\bin\Debug\Clipbrd Plus.pdb
+D:\CloudStation\C#\Clipbrd Plus\bin\Debug\MaterialDesignColors.dll
+D:\CloudStation\C#\Clipbrd Plus\bin\Debug\MaterialDesignThemes.Wpf.dll
+D:\CloudStation\C#\Clipbrd Plus\bin\Debug\NHotkey.dll
+D:\CloudStation\C#\Clipbrd Plus\bin\Debug\NHotkey.Wpf.dll
+D:\CloudStation\C#\Clipbrd Plus\bin\Debug\SharpClipboard.dll
+D:\CloudStation\C#\Clipbrd Plus\bin\Debug\System.Data.SQLite.dll
+D:\CloudStation\C#\Clipbrd Plus\bin\Debug\MaterialDesignColors.pdb
+D:\CloudStation\C#\Clipbrd Plus\bin\Debug\MaterialDesignThemes.Wpf.pdb
+D:\CloudStation\C#\Clipbrd Plus\bin\Debug\MaterialDesignThemes.Wpf.xml
+D:\CloudStation\C#\Clipbrd Plus\bin\Debug\SharpClipboard.xml
+D:\CloudStation\C#\Clipbrd Plus\bin\Debug\System.Data.SQLite.xml
+D:\CloudStation\C#\Clipbrd Plus\bin\Debug\System.Data.SQLite.dll.config
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\clipsetting.g.cs
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\Gensetting.g.cs
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\history.g.cs
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\hotkeysetting.g.cs
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\MainWindow.g.cs
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\StartWindow.g.cs
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\viewsetting.g.cs
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\Welcome.g.cs
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\App.g.cs
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\Clipbrd Plus_MarkupCompile.cache
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\Clipbrd Plus_MarkupCompile.lref
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\App.baml
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\clipsetting.baml
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\Gensetting.baml
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\history.baml
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\hotkeysetting.baml
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\Language\en-US.baml
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\Language\zh-CN.baml
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\MainWindow.baml
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\StartWindow.baml
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\viewsetting.baml
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\Welcome.baml
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\Clipbrd Plus.g.resources
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\Clipbrd_Plus.Properties.Resources.resources
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\Clipboard Plus.csproj.GenerateResource.cache
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\Clipbrd Plus.exe.manifest
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\Clipbrd Plus.application
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\Clipboard Plus.csproj.CopyComplete
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\Clipbrd Plus.exe
+D:\CloudStation\C#\Clipbrd Plus\obj\Debug\Clipbrd Plus.pdb

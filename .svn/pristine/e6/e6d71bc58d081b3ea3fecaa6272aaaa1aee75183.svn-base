@@ -1,0 +1,68 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+
+
+namespace Clipbrd_Plus
+{
+    class PublicFuncition
+    {        //获取屏幕宽度
+        public static int GetScreenWidth()
+        {
+            int x = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Size.Width;
+            return x;
+        }
+
+        //获取屏幕高度
+        public static int GetScreenHeight()
+        {
+            int x = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Size.Height;
+            return x;
+        }
+
+
+
+
+        //[DllImport("user32.dll", SetLastError = true)]
+        //public static extern bool GetCursorPos(out Point pt);//只能取当前窗体内的鼠标坐标
+        //private static extern IntPtr GetDC(IntPtr hwnd);//返回设备场景句柄，用来取全局鼠标坐标
+
+
+
+        //通过指定关键字查询并关闭窗口
+        public static void FindCloseWindow(string name)
+        {
+            if (MyVariable.Variable.TempLoadedHistory == true)
+            {
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.Title == name)
+                    {
+                        //window.ShowInTaskbar = false;
+                        window.Close();
+                    }
+
+                }
+            }
+        }
+
+        public static void SetLanguage(string LanguageTag)
+        {
+            List<ResourceDictionary> dictionaryList = new List<ResourceDictionary>();
+            foreach (ResourceDictionary dictionary in Application.Current.Resources.MergedDictionaries)
+            {
+                dictionaryList.Add(dictionary);
+            }
+            string requestedCulture = string.Format(@"Resources\{0}.xaml", LanguageTag);
+            ResourceDictionary resourceDictionary = dictionaryList.FirstOrDefault(d => d.Source.OriginalString.Equals(requestedCulture));
+            Application.Current.Resources.MergedDictionaries.Remove(resourceDictionary);
+            Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+
+        }
+    }
+}

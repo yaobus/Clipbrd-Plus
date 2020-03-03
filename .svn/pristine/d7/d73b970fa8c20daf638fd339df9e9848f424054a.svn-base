@@ -1,0 +1,67 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:Clipbrd_Plus">
+
+    <!--菜单标题设置-->
+    <s:String x:Key="SetTitle">Clipboard Plus 设置</s:String>
+
+    <!--功能菜单设置-->
+    <s:String x:Key="SetWelcome">欢迎</s:String>
+    <s:String x:Key="SetGeneralSetting">常规项设置</s:String>
+    <s:String x:Key="SetClipSetting">剪切板设置</s:String>
+    <s:String x:Key="SetHotKeySetting">快捷键设置</s:String>
+    <s:String x:Key="SetPreviewSetting">预览设置</s:String>
+    <s:String x:Key="SetScreenShotSetting">截屏设置</s:String>
+    <s:String x:Key="SetAbout">关于</s:String>
+
+    <!--欢迎设置-->
+    <s:String x:Key="WelTitle">欢迎使用ClipBoard Plus</s:String>
+
+    <!--常规设置-->
+    <s:String x:Key="GenStart">开机自启动</s:String>
+    <s:String x:Key="GenPlayVoice">播放提示音</s:String>
+    <s:String x:Key="GenBrowse">浏览</s:String>
+    <s:String x:Key="GenListen">试听</s:String>
+    <s:String x:Key="GenHistory">历史记录数量设置</s:String>
+    <s:String x:Key="GenHistory2">(16-2048条)</s:String>
+    <s:String x:Key="GenLanguage">选择您使用的语言</s:String>
+    <s:String x:Key="GenRestartInfo">您需要重启本程序</s:String>
+    <s:String x:Key="GenRestart">重启</s:String>
+
+    <!--剪切板设置-->
+    <s:String x:Key="ClipText">记录剪切板文本历史</s:String>
+    <s:String x:Key="ClipBitmap">记录剪切板图像历史</s:String>
+    <s:String x:Key="ClipFile">记录剪切板文件历史</s:String>
+
+    <!--快捷键设置-->
+    <s:String x:Key="HotLastOne">切换到上一条记录</s:String>
+    <s:String x:Key="HotLastOnePaste">切换到上一条记录并粘贴</s:String>
+    <s:String x:Key="HotNextOne">切换到下一条记录</s:String>
+    <s:String x:Key="HotNextOnePaste">切换到下一条记录并粘贴</s:String>
+    <s:String x:Key="HotScreenShot">截取屏幕图像</s:String>
+    <s:String x:Key="HotScreenShotSave">截取屏幕图像并保存</s:String>
+    <s:String x:Key="HotPasteToWindow">贴图到窗口</s:String>
+    <s:String x:Key="HotShowHide">显示/隐藏窗口上的贴图</s:String>
+    <s:String x:Key="HotReset">重置</s:String>
+
+    <!--预览设置-->
+    <s:String x:Key="ViewText">文本预览设置，显示前</s:String>
+    <s:String x:Key="ViewText2">个字符(8-128)</s:String>
+    <s:String x:Key="ViewImg">图片预览设置，显示宽</s:String>
+    <s:String x:Key="ViewImg2">像素(100-500)</s:String>
+    <s:String x:Key="ViewSounds">声音文件预览，音量值</s:String>
+    <s:String x:Key="ViewSounds2">(1-100)</s:String>
+
+    <!--历史记录-->
+    <s:String x:Key="HisTitle">剪切板历史记录</s:String>
+    <s:String x:Key="HisAllType">全部类型</s:String>
+    <s:String x:Key="HisTextType">文本类型</s:String>
+    <s:String x:Key="HisBitmapType">位图类型</s:String>
+
+    <!--托盘-->
+    <s:String x:Key="NotifyIconInfo">剪切板增强</s:String>
+    <s:String x:Key="NotifyIconSet">设置</s:String>
+    <s:String x:Key="NotifyIconHistory">历史记录</s:String>
+    <s:String x:Key="NotifyIconExit">退出</s:String>
+</ResourceDictionary>

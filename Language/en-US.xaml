@@ -1,0 +1,70 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:Clipbrd_Plus">
+
+    <!--菜单标题设置
+    <s:String x:Key="SetTitle">Clipboard Plus Setting</s:String>
+    -->
+
+
+
+    <!--功能菜单设置-->
+    <s:String x:Key="SetWelcome">Welcome</s:String>
+    <s:String x:Key="SetGeneralSetting">General Setting</s:String>
+    <s:String x:Key="SetClipSetting">ClipBoard Setting</s:String>
+    <s:String x:Key="SetHotKeySetting">HotKey Setting</s:String>
+    <s:String x:Key="SetPreviewSetting">Preview Setting</s:String>
+    <s:String x:Key="SetScreenShotSetting">Screen ShotSetting</s:String>
+    <s:String x:Key="SetAbout">About</s:String>
+
+    <!--欢迎设置-->
+    <s:String x:Key="WelTitle">Welcome to use ClipBoard Plus</s:String>
+
+    <!--常规设置-->
+    <s:String x:Key="GenStart">Start-up</s:String>
+    <s:String x:Key="GenPlayVoice">Play prompt sound</s:String>
+    <s:String x:Key="GenBrowse">Browse</s:String>
+    <s:String x:Key="GenListen">Listen</s:String>
+    <s:String x:Key="GenHistory">Number Setting of History Records</s:String>
+    <s:String x:Key="GenHistory2">(16-2048)</s:String>
+    <s:String x:Key="GenLanguage">Choose your language</s:String>
+    <s:String x:Key="GenRestartInfo">You need to restart this program</s:String>
+    <s:String x:Key="GenRestart">Restart</s:String>
+
+    <!--剪切板设置-->
+    <s:String x:Key="ClipText">Recording the history of clipboard text</s:String>
+    <s:String x:Key="ClipBitmap">Recording the  history of the clipboard image</s:String>
+    <s:String x:Key="ClipFile">Recording the history of clipboard File</s:String>
+
+    <!--快捷键设置-->
+    <s:String x:Key="HotShowSet">Show setting</s:String>
+    <s:String x:Key="HotShowHistory">Show history</s:String>
+    <s:String x:Key="HotLastOne">Switch to the previous record</s:String>
+    <s:String x:Key="HotLastOnePaste">Switch to the previous record and paste</s:String>
+    <s:String x:Key="HotNextOne">Switch to the next record</s:String>
+    <s:String x:Key="HotNextOnePaste">Switch to the next record and paste</s:String>
+    <s:String x:Key="HotPasteToWindow">Mapping to window</s:String>
+    <s:String x:Key="HotShowHide">Display/Hide Mapping</s:String>
+    <s:String x:Key="HotReset">Reset</s:String>
+
+    <!--预览设置-->
+    <s:String x:Key="ViewText">Text preview settings, displaying the first </s:String>
+    <s:String x:Key="ViewText2">characters(8-128)</s:String>
+    <s:String x:Key="ViewImg">Picture preview settings, display width</s:String>
+    <s:String x:Key="ViewImg2">pixel(100-500)</s:String>
+    <s:String x:Key="ViewSounds">Sound file preview, volume value</s:String>
+    <s:String x:Key="ViewSounds2">(1-100)</s:String>
+
+    <!--历史记录-->
+    <s:String x:Key="HisTitle">History of clipboard</s:String>
+    <s:String x:Key="HisAllType">All Type</s:String>
+    <s:String x:Key="HisTextType">Text</s:String>
+    <s:String x:Key="HisBitmapType">Bitmap</s:String>
+
+    <!--托盘-->
+    <s:String x:Key="NotifyIconInfo">Clipboard Plus</s:String>
+    <s:String x:Key="NotifyIconSet">Setting</s:String>
+    <s:String x:Key="NotifyIconHistory">History</s:String>
+    <s:String x:Key="NotifyIconExit">Exit</s:String>
+</ResourceDictionary>

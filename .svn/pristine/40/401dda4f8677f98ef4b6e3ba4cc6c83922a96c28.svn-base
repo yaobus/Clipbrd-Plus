@@ -1,0 +1,292 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using Drawing = System.Drawing;
+using Forms = System.Windows.Forms;
+using System.Configuration;
+using System.Diagnostics;
+using MaterialDesignThemes.Wpf;
+using System.Runtime.InteropServices;
+
+namespace Clipbrd_Plus
+{
+    /// <summary>
+    /// StartWindow.xaml 的交互逻辑
+    /// </summary>
+    public partial class StartWindow : Window
+    {
+        public StartWindow()
+        {
+            InitializeComponent();
+            // this.Hide();
+            ReadConfig();
+        }
+
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+
+
+        }
+
+        //读取配置
+        private void ReadConfig()
+        {
+
+            InitializationIcon(); //初始化托盘图标
+            // bool StaringRun = Convert.ToBoolean(ConfigurationManager.AppSettings["StaringRun"]);
+            bool fristRun = Convert.ToBoolean(ConfigurationManager.AppSettings["FristRun"]); //是否是初次运行
+            
+
+
+            if (fristRun == true)
+            {
+                Window settingWindow = new MainWindow();
+                settingWindow.Show();
+                MyVariable.Variable.SettingLoaded = true;
+                PublicFuncition.ReviseConfig("FristRun", "false");
+            }
+            else
+            {
+                this.Hide();
+            }
+
+            int LanguageIndex = Convert.ToInt32(ConfigurationManager.AppSettings["Language"]);//取语言索引
+            switch (LanguageIndex)
+            {
+                case 0:
+                    PublicFuncition.SetLanguage("zh-CN");
+                  //  PublicFuncition.ReviseConfig("Language", "0");
+                    break;
+                case 1:
+                    PublicFuncition.SetLanguage("en-US");
+                  //  PublicFuncition.ReviseConfig("Language", "1");
+                    break;
+            }
+        }
+
+
+
+        //初始化托盘图标及右键菜单
+        public Forms.NotifyIcon NotifyIcon;
+
+        private void InitializationIcon()
+        {
+            //this.NotifyIcon = new Forms.NotifyIcon();
+            this.NotifyIcon = new Forms.NotifyIcon();
+            this.NotifyIcon.BalloonTipText = "剪切板增强"; //启动时提示用户已置托盘
+            this.NotifyIcon.ShowBalloonTip(2000); //提示隐藏时间
+            this.NotifyIcon.Text = "剪切板增强"; //鼠标悬停提示
+            this.NotifyIcon.Icon = new Drawing.Icon(@"icon/icon.ico"); //设置程序托盘图标
+            this.NotifyIcon.Visible = true; //显示程序托盘图标
+
+            //双击图标弹出历史记录页面
+            // NotifyIcon.MouseDoubleClick += NotifyIcon_MouseDoubleClick1;
+
+
+            NotifyIcon.MouseClick += NotifyIcon_MouseClick;
+            object NotifyIconSet = FindResource("NotifyIconSet");
+            System.Windows.Forms.MenuItem notifyMenuItem1 = new Forms.MenuItem(NotifyIconSet.ToString());
+            notifyMenuItem1.Click += NotifyMenuItem_Click; //托盘图标单击弹出设置页面
+
+            object NotifyIconHistory = FindResource("NotifyIconHistory");
+            System.Windows.Forms.MenuItem notifyMenuItem2 = new Forms.MenuItem(NotifyIconHistory.ToString());
+            notifyMenuItem2.Click += NotifyMenuItem2_Click; //托盘图标单击弹出历史记录页面
+
+            object NotifyIconExit = FindResource("NotifyIconExit");
+            System.Windows.Forms.MenuItem notifyMenuItem3 = new Forms.MenuItem(NotifyIconExit.ToString());
+            notifyMenuItem3.Click += NotifyMenuItem3_Click; //托盘图标单击退出
+
+            System.Windows.Forms.MenuItem[] notifyItems = new Forms.MenuItem[]
+                {notifyMenuItem1, notifyMenuItem2, notifyMenuItem3}; //创建右键菜单目录集合
+            this.NotifyIcon.ContextMenu = new Forms.ContextMenu(notifyItems); //绑定右键菜单到控件
+
+
+        }
+
+
+
+
+
+
+        //关闭程序
+        private void NotifyMenuItem3_Click(object sender, EventArgs e)
+        {
+            MyVariable.Variable.SettingLoaded = false;
+            this.NotifyIcon.Visible = false;//清除程序的托盘图标
+            MyVariable.Variable.SettingLoaded = false;
+            this.NotifyIcon.Icon.Dispose();//释放图标资源
+            Application.Current.Shutdown();
+        }
+
+
+        //弹出历史记录页面
+        private void NotifyMenuItem2_Click(object sender, EventArgs e)
+        {
+
+            ShowHistoryCenter();
+        }
+
+        //弹出设置页面
+        private void NotifyMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowSetting();
+        }
+
+
+        //双击托盘图标显示历史记录页面，已经弃用！！
+        private void NotifyIcon_MouseDoubleClick1(object sender, Forms.MouseEventArgs e)
+        {
+            //  ShowHistoryCenter();
+        }
+
+
+        //单击弹出历史记录页面
+        private void NotifyIcon_MouseClick(object sender, Forms.MouseEventArgs e)
+        {
+
+            //如果历史记录窗口已经打开，则关闭，否则判断是不是需要新建窗口
+            if (MyVariable.Variable.TempLoadedHistory == true)
+            {
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.Title is "history")
+                    {
+                        //window.ShowInTaskbar = false;
+                        window.Close();
+                    }
+
+                }
+            }
+            else
+            {
+                //如果按下的是左键，则执行显示代码
+                if (e.Button == Forms.MouseButtons.Left)
+                {
+                    // Point MousePoint = new Point(Forms.Control.MousePosition.X, Forms.Control.MousePosition.Y);//取鼠标坐标位置
+
+                    // int TaskBarHeight=(Forms.Screen.PrimaryScreen.Bounds.Height- Forms.SystemInformation.WorkingArea.Height );//取任务栏高度
+                    int x = Forms.Control.MousePosition.X;
+                    int y = Forms.SystemInformation.WorkingArea.Height;//取工作区（除开任务栏之外的屏幕区域），让程序界面刚好显示在任务栏上方！
+
+                    // MessageBox.Show(TaskBarHeight.ToString());
+                    MyVariable.Variable.TempLoadedHistory = true;
+                    ShowHistory(x, y);
+
+                }
+
+            }
+
+        }
+
+
+        //在屏幕中间显示历史记录窗口
+        private void ShowHistoryCenter()
+        {
+            if (MyVariable.Variable.HistoryLoaded == true)
+            {
+
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.Title is "history")
+                    {
+                        window.ShowInTaskbar = true;
+                        window.Activate();
+                    }
+
+                }
+            }
+            else
+            {
+                Window historyWindow = new history();
+
+                this.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                historyWindow.ShowInTaskbar = true;
+                historyWindow.Show();
+
+                //MyVariable.Variable.HistoryLoaded = true;
+            }
+        }
+
+
+        // 在鼠标旁边上方显示历史记录窗口
+        private void ShowHistory(double x, double y)
+        {
+            if (MyVariable.Variable.HistoryLoaded == true)
+            {
+
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.Title is "history")
+                    {
+                        window.ShowInTaskbar = false;
+                        window.Activate();
+
+                    }
+
+                }
+            }
+            else
+            {
+                Window historyWindow = new history
+                {
+                    WindowStartupLocation = WindowStartupLocation.Manual
+                };
+                historyWindow.Left = x - historyWindow.Width;
+                historyWindow.Top = y - historyWindow.Height;
+                historyWindow.ShowInTaskbar = false;
+                historyWindow.Show();
+                MyVariable.Variable.TempLoadedHistory = true;
+
+            }
+
+
+        }
+
+
+        //如果setting窗口已经打开，则切换至该窗口，否则打开新setting窗口
+        private void ShowSetting()
+        {
+            if (MyVariable.Variable.SettingLoaded == true)
+            {
+                foreach (Window window in Application.Current.Windows)
+                {
+                    if (window.Title is "Clipboard Plus Setting")
+                    {
+                        window.Activate();
+                    }
+                }
+            }
+            else
+            {
+                Window settingWindow = new MainWindow();
+                settingWindow.Show();
+                MyVariable.Variable.SettingLoaded = true;
+            }
+
+
+
+
+        }
+
+
+
+
+
+
+
+    }
+
+}
+
+

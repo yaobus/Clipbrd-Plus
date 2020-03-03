@@ -1,0 +1,82 @@
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Navigation;
+using Drawing = System.Drawing;
+using Forms = System.Windows.Forms;
+using System.Configuration;
+using MyVariable;
+
+
+namespace Clipbrd_Plus
+{
+    /// <summary>
+    /// MainWindow.xaml 的交互逻辑
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        // private Forms.NotifyIcon NotifyIcon;
+        public MainWindow()
+        {
+            InitializeComponent();
+            SettingPlans.Children.Clear();
+            SettingPlans.Children.Add(new Welcome());
+            PublicFunction.LanguageShow(ClipBoardSet.Default.LanguageIndex);//根据配置文件设置用户语言
+        }
+
+
+
+        //不同目录被选中，弹出相应的菜单
+        private void ListView_Menu_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int index = ListView_Menu.SelectedIndex;
+            MoveCurrsorMenu(index);
+            
+            switch (index)
+            {
+                case 0:
+                    SettingPlans.Children.Clear();
+                    SettingPlans.Children.Add(new Welcome());
+                    break;
+                case 1:
+                    SettingPlans.Children.Clear();
+                    SettingPlans.Children.Add(new Gensetting());
+                    break;
+                case 2:
+                    SettingPlans.Children.Clear();
+                    SettingPlans.Children.Add(new Clipsetting());
+                    break;
+                case 3:
+                    SettingPlans.Children.Clear();
+                    SettingPlans.Children.Add(new Hotkeysetting());
+                    break;
+                case 4:
+                    SettingPlans.Children.Clear();
+                    SettingPlans.Children.Add(new Viewsetting());
+                    break;
+            }
+
+        }
+
+        //移动选择指示器（横条）
+        private void MoveCurrsorMenu(int index)
+        {
+            ListView_Menu.OnApplyTemplate();
+            SelectMenuSide.Margin = new Thickness(0, 40 * index, 0, 0);
+        }
+
+
+
+
+        //程序退出时清空托盘图标残留
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MyVariable.Variable.SettingLoaded = false;
+
+        }
+
+
+
+    }
+}

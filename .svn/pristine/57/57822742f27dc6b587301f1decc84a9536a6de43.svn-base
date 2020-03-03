@@ -1,0 +1,78 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using MyVariable;
+
+namespace Clipbrd_Plus
+{
+    /// <summary>
+    /// history.xaml 的交互逻辑
+    /// </summary>
+    public partial class history : Window
+    {
+        public history()
+        {
+            InitializeComponent();
+
+
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            //设置窗口样式
+            if (MyVariable.Variable.TempLoadedHistory == true)
+            {
+                this.HistoryBar.Visibility = Visibility.Hidden;
+                Thickness MyThickness = new Thickness
+                {
+                    Top = 10
+                };
+
+                this.BodyGrid.Margin = MyThickness;
+            }
+
+            MyVariable.Variable.HistoryLoaded = true;
+        }
+
+
+        //程序关闭时的操作
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            MyVariable.Variable.TempLoadedHistory = false;
+            MyVariable.Variable.HistoryLoaded = false;
+        }
+
+
+        //关闭窗口按钮被单击
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        //允许窗口被拖动
+        private void HistoryBar_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DragMove();
+        }
+
+
+        //在临时打开历史记录窗口后鼠标移开则关闭窗口
+
+        private void Window_MouseLeave(object sender, MouseEventArgs e)
+        {
+            PublicFuncition.FindCloseWindow("history");
+        }
+
+
+    }
+}

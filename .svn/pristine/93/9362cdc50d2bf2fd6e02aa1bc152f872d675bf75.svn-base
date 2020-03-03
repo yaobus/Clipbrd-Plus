@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MyVariable
+{
+    public static class Variable
+    {
+        public static bool HistoryLoaded;//历史记录窗口是否打开
+        public static bool SettingLoaded;//设置窗口是否打开
+        public static bool TempLoadedHistory;//历史记录窗口是不是临时打开
+        public static bool TempActivate;//窗口是否是临时激活
+        public static int LanguageIndex;//语言索引
+        public static string HotKeyCode; //快捷键代码
+
+        public static bool SetClip;//是否是设置剪切板内容,防止重复添加数据到数据库
+    }
+}

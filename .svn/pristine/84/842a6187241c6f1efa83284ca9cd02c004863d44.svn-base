@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <configSections>
+  </configSections>
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
+  </startup>
+
+  <appSettings>
+    <add key="FristRun"  value="true"/>
+
+    <add key="StaringRun" value="true"/>
+    <add key="PlayBeep" value="true"/>
+    <add key="SoundFile" value="..\sounds\default.wav"/>
+    <add key="NotifyIconShow" value="true"/>
+    <add key="HistoryNumber" value="32"/>
+
+    <add key="TextHistory" value="true"/>
+    <add key="BitmapHistory" value="true"/>
+    <add key="FileHistory" value="true"/>
+
+
+  </appSettings>
+
+</configuration>

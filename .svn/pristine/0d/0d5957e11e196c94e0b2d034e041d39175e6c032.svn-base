@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <configSections>
+    <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" >
+      <section name="Clipbrd_Plus.ClipBoardSet" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+      <section name="Clipbrd_Plus.App" type="System.Configuration.ClientSettingsSection, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false" />
+    </sectionGroup>
+  </configSections>
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.7.2" />
+  </startup>
+
+  <appSettings>
+    <add key="FristRun"  value="true"/>
+
+    <add key="StaringRun" value="true"/>
+
+
+  </appSettings>
+
+  <userSettings>
+    <Clipbrd_Plus.ClipBoardSet>
+      <setting name="StartUp" serializeAs="String">
+        <value>True</value>
+      </setting>
+      <setting name="PlayVoice" serializeAs="String">
+        <value>False</value>
+      </setting>
+      <setting name="VoicePath" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="HistoryNumber" serializeAs="String">
+        <value>32</value>
+      </setting>
+      <setting name="LanguageIndex" serializeAs="String">
+        <value>0</value>
+      </setting>
+      <setting name="TextHistory" serializeAs="String">
+        <value>True</value>
+      </setting>
+      <setting name="BitmapHistory" serializeAs="String">
+        <value>True</value>
+      </setting>
+      <setting name="FileHistory" serializeAs="String">
+        <value>False</value>
+      </setting>
+      <setting name="KeyLastOne" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="KeyLastOnePaste" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="KeyNextOne" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="KeyNextOnePaste" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="KeyScreenShot" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="KeyScreenShotSave" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="KeyPasteToWindow" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="KeyShowHide" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="ViewTextNumber" serializeAs="String">
+        <value>16</value>
+      </setting>
+      <setting name="ViewImgWidth" serializeAs="String">
+        <value>400</value>
+      </setting>
+      <setting name="ViewSoundVolume" serializeAs="String">
+        <value>45</value>
+      </setting>
+      <setting name="FirstRun" serializeAs="String">
+        <value>True</value>
+      </setting>
+    </Clipbrd_Plus.ClipBoardSet>
+    <Clipbrd_Plus.App>
+      <setting name="StartUp" serializeAs="String">
+        <value>True</value>
+      </setting>
+      <setting name="PlayVoice" serializeAs="String">
+        <value>False</value>
+      </setting>
+      <setting name="VoicePath" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="HistoryNumber" serializeAs="String">
+        <value>32</value>
+      </setting>
+      <setting name="LanguageIndex" serializeAs="String">
+        <value>0</value>
+      </setting>
+      <setting name="TextHistory" serializeAs="String">
+        <value>True</value>
+      </setting>
+      <setting name="BitmapHistory" serializeAs="String">
+        <value>True</value>
+      </setting>
+      <setting name="FileHistory" serializeAs="String">
+        <value>False</value>
+      </setting>
+      <setting name="KeyLastOne" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="KeyLastOnePaste" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="KeyNextOne" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="KeyNextOnePaste" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="KeyScreenShot" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="KeyScreenShotSave" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="KeyPasteToWindow" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="KeyShowHide" serializeAs="String">
+        <value />
+      </setting>
+      <setting name="ViewTextNumber" serializeAs="String">
+        <value>16</value>
+      </setting>
+      <setting name="ViewImgWidth" serializeAs="String">
+        <value>400</value>
+      </setting>
+      <setting name="ViewSoundVolume" serializeAs="String">
+        <value>45</value>
+      </setting>
+    </Clipbrd_Plus.App>
+  </userSettings>
+</configuration>

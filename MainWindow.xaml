@@ -1,0 +1,77 @@
+﻿<Window x:Class="Clipbrd_Plus.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Clipbrd_Plus"
+        xmlns:forms="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        mc:Ignorable="d"
+        Title="Clipboard Plus Setting"  Height="510" Width="950" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Closing="Window_Closing"  >
+
+    <Grid Background="#FFEEEEEE">
+        <Grid x:Name="SettingPlans" Margin="190 0 0 0" Background="White">
+            <Image Margin="0"  HorizontalAlignment="Left"></Image>
+        </Grid>
+
+        <Grid Margin="0,0,0,0" Width="190" HorizontalAlignment="Left" Background="#eeeeee"  >
+            <ListView x:Name="ListView_Menu" SelectionChanged="ListView_Menu_OnSelectionChanged" FontSize="15" ScrollViewer.HorizontalScrollBarVisibility="Disabled"  >
+                <ListViewItem Height="40" >
+                    <StackPanel Orientation="Horizontal" >
+                        <md:PackIcon Kind="Firework" Width="20" Height="20" Margin="0" Foreground="#34b4c8"></md:PackIcon>
+                        <TextBlock Text="{DynamicResource SetWelcome}" Margin="10,0"></TextBlock>
+                    </StackPanel>
+                </ListViewItem>
+
+                <ListViewItem Height="40" >
+                    <StackPanel Orientation="Horizontal" >
+                        <md:PackIcon Kind="Settings" Width="20" Height="20" Margin="0" Foreground="#34b4c8"></md:PackIcon>
+                        <TextBlock x:Name="GenSet" Text="{DynamicResource SetGeneralSetting}" Margin="10,0"></TextBlock>
+                    </StackPanel>
+                </ListViewItem>
+
+
+                <ListViewItem Height="40">
+                    <StackPanel Orientation="Horizontal" >
+                        <md:PackIcon Kind="Clipboard" Margin="0" Width="20" Height="20" Foreground="#34b4c8"></md:PackIcon>
+                        <TextBlock Text="{DynamicResource SetClipSetting}" Margin="10,0"></TextBlock>
+                    </StackPanel>
+                </ListViewItem>
+
+                <ListViewItem Height="40">
+                    <StackPanel Orientation="Horizontal" >
+                        <md:PackIcon Kind="Keyboard" Margin="0" Width="20" Height="20" Foreground="#34b4c8"></md:PackIcon>
+                        <TextBlock Text="{DynamicResource SetHotKeySetting}" Margin="10,0"></TextBlock>
+                    </StackPanel>
+                </ListViewItem>
+
+                <ListViewItem Height="40">
+                    <StackPanel Orientation="Horizontal" >
+                        <md:PackIcon Kind="PrintPreview" Margin="0" Width="20" Height="20" Foreground="#34b4c8"></md:PackIcon>
+                        <TextBlock Text="{DynamicResource SetPreviewSetting}" Margin="10,0"></TextBlock>
+                    </StackPanel>
+                </ListViewItem>
+
+                <ListViewItem Height="40">
+                    <StackPanel Orientation="Horizontal" >
+                        <md:PackIcon Kind="MonitorScreenshot" Margin="0" Width="20" Height="20" Foreground="#34b4c8"></md:PackIcon>
+                        <TextBlock Text="{DynamicResource SetScreenShotSetting}" Margin="10,0"></TextBlock>
+                    </StackPanel>
+                </ListViewItem>
+
+                <ListViewItem Height="40">
+                    <StackPanel Orientation="Horizontal" >
+                        <md:PackIcon Kind="About" Margin="0" Width="20" Height="20" Foreground="#34b4c8"></md:PackIcon>
+                        <TextBlock Text="{DynamicResource SetAbout}" Margin="10,0"></TextBlock>
+                    </StackPanel>
+
+                </ListViewItem>
+            </ListView>
+            <md:TransitioningContent OpeningEffect="{md:TransitionEffect SlideInFromLeft, Duration=0:0:0.5}">
+                <Grid  x:Name="SelectMenuSide" Width="5" Height="40" Margin="0,0,0,0" Background="#34B4C8" VerticalAlignment="Top" HorizontalAlignment="Left"></Grid>
+            </md:TransitioningContent>
+        </Grid>
+
+
+    </Grid>
+</Window>

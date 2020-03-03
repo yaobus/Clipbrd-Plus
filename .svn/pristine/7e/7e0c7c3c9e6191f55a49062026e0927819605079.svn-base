@@ -1,0 +1,20 @@
+﻿<Window x:Class="Clipbrd_Plus.StartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Clipbrd_Plus"
+        mc:Ignorable="d"
+        Title="StartWindow" Height="450" Width="800" Activated="Window_Activated" Visibility="Hidden" Closing="StartWindow_OnClosing">
+    <Grid>
+        <WrapPanel Orientation="Vertical">
+            <TextBlock x:Name="TbNotifyIconInfo" Text="{DynamicResource NotifyIconInfo}"/>
+            <TextBlock x:Name="TbNotifyIconSet" Text="{DynamicResource NotifyIconSet}"/>
+            <TextBlock x:Name="TbNotifyIconHistory" Text="{DynamicResource NotifyIconHistory}"/>
+            <TextBlock x:Name="TbNotifyIconExit" Text="{DynamicResource NotifyIconExit}"/>
+        </WrapPanel>
+     
+        
+    </Grid>
+</Window>

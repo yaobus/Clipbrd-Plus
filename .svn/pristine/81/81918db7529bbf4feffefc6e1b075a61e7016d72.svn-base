@@ -1,0 +1,105 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using MyVariable;
+
+
+namespace Clipbrd_Plus
+{
+    /// <summary>
+    /// gensetting.xaml 的交互逻辑
+    /// </summary>
+    public partial class Gensetting : UserControl
+    {
+        public Gensetting()
+        {
+            InitializeComponent();
+
+            if (_languageIndexShow==false)
+            {
+                LanguageSetIndexShow();
+            }
+            else
+            {
+                if (MyVariable.Variable.LanguageTemp != -1)
+                {
+                    LanguageList.SelectedIndex = MyVariable.Variable.LanguageTemp;
+                }
+
+            }
+            
+        }
+
+        private bool _languageIndexShow=false;
+
+        //读取语言索引并显示在组合框中
+        private void LanguageSetIndexShow()
+        {
+
+            LanguageList.SelectedIndex = MyVariable.Variable.LanguageIndex;
+            _languageIndexShow = true;
+        }
+
+
+
+        //语言选择框中语言被改变后，重载UI语言
+        private void LanguageList_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (_languageIndexShow == true)
+            {
+                int index = LanguageList.SelectedIndex;
+                // int index = MyVariable.Variable.LanguageIndex;
+
+                if (index != -1)
+                {
+                    switch (index)
+                    {
+                        case 0:
+
+                            PublicFuncition.ReviseConfig("Language", "0");
+                            PublicFuncition.SetLanguage("zh-CN");
+                            MyVariable.Variable.LanguageTemp = 0;
+                            break;
+
+                        case 1:
+                            PublicFuncition.ReviseConfig("Language", "1");
+                            PublicFuncition.SetLanguage("en-US");
+                            MyVariable.Variable.LanguageTemp = 1;
+                            break;
+
+                    }
+                    LanguageSetInfo.Visibility = Visibility.Visible;
+                    //  AppRestartButton.Visibility = Visibility.Visible;
+                    //_languageIndexShow = false;
+                }
+            }
+
+
+
+              
+
+            
+
+
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Forms.Application.Restart();
+            
+            Environment.Exit(0);
+        }
+    }
+}

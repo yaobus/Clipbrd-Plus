@@ -1,0 +1,93 @@
+﻿<Window x:Class="Clipbrd_Plus.history"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:Clipbrd_Plus"
+        mc:Ignorable="d"
+        Title="history" Height="600" Width="401" ResizeMode="NoResize" Background="#34b4c8" WindowStartupLocation="CenterScreen" Loaded="Window_Loaded" Closing="Window_Closing" AutomationProperties.Name="history" Opacity="50" WindowStyle="None" MouseLeave="Window_MouseLeave">
+    <Grid x:Name="HistoryWindow" >
+
+
+        <Grid x:Name="HistoryBar" Height="30" Margin="0" VerticalAlignment="Top" Background="#34b4c8" MouseDown="HistoryBar_OnMouseDown">
+            <md:PackIcon Margin="5,0,0,0" Height="20" Width="20" Kind="History" Foreground="White" VerticalAlignment="Center"/>
+            <TextBlock Margin="30,0" Height="20" FontSize="14" Foreground="White" Text="{DynamicResource HisTitle}" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="ExitButton" Width="30" Height="Auto"  Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Click="ButtonBase_OnClick">
+                    <md:PackIcon Width="30" Height="30" Kind="Close" Foreground="White" ></md:PackIcon>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <Grid x:Name="BodyGrid" Margin="0,30,0,0" >
+
+            <Grid Height="35" Margin="0" VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="#eeeeee">
+                <ListView x:Name="TypeChoice" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" SelectionChanged="TypeChoice_OnSelectionChanged">
+
+                    <!--水平显示表项-->
+                    <ListView.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel/>
+                        </ItemsPanelTemplate>
+                    </ListView.ItemsPanel>
+                    <!--水平显示表项-->
+
+
+                    <ListViewItem x:Name="AllType" Width="100" Height="35" >
+                        <StackPanel Orientation="Horizontal" >
+                            <md:PackIcon Kind="FileDocument"  Foreground="#34b4c8"></md:PackIcon>
+                            <TextBlock Margin="5,0,0,0" Text="{DynamicResource HisAllType}" Foreground="#FF494949"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="TextType" Width="100" Height="35" >
+                        <StackPanel Orientation="Horizontal" >
+                            <md:PackIcon Kind="Text"  Foreground="#34b4c8"></md:PackIcon>
+                            <TextBlock Margin="5,0,0,0" Text="{DynamicResource HisTextType}" Foreground="#FF494949"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+
+                    <ListViewItem x:Name="ImgType" Width="100" Height="35" >
+                        <StackPanel Orientation="Horizontal" >
+                            <md:PackIcon Kind="Image"  Foreground="#34b4c8"></md:PackIcon>
+                            <TextBlock Margin="5,0,0,0" Text="{DynamicResource HisBitmapType}" Foreground="#FF494949"></TextBlock>
+                        </StackPanel>
+                    </ListViewItem>
+
+                </ListView>
+            </Grid>
+
+            <Grid x:Name="UserGrid" Margin="0,35,0,0" Background="#eeeeee">
+                <Grid Margin="0" Height="30" VerticalAlignment="Top">
+                    <TextBox x:Name="KeyWordBox" Width="330" FontSize="16" HorizontalAlignment="Left"></TextBox>
+                    <Button x:Name="Search" Margin="0,0,6,0" Width="60" Height="30" Background="#34b4c8" BorderBrush="#34b4c8" Padding="0" HorizontalAlignment="Right" Click="Search_OnClick">
+                        <StackPanel Orientation="Horizontal"  Height="24" Margin="0" HorizontalAlignment="Right">
+                            <md:PackIcon Kind="Search" Height="24"  Width="24"></md:PackIcon>
+                        </StackPanel>
+                    </Button>
+
+                </Grid>
+
+                <ListView x:Name="HistoryListView" Margin="0,30,0,0"  SelectionChanged="HistoryListView_OnSelectionChanged" MouseMove="HistoryListView_OnMouseMove">
+                    <ListView.View >
+                        <GridView >
+                            <GridViewColumn  Width="0"   DisplayMemberBinding="{Binding Path=Id}" />
+                            <GridViewColumn  Width="45" Header="type" DisplayMemberBinding="{Binding Path=Type}"/>
+                            <GridViewColumn  Width="250" Header="data" DisplayMemberBinding="{Binding Path=Data}"/>
+                            <GridViewColumn  Width="0" DisplayMemberBinding="{Binding Path=Time}"/>
+                            <GridViewColumn  Width="0" DisplayMemberBinding="{Binding Path=Lock}"/>
+                            <GridViewColumn  Width="0" DisplayMemberBinding="{Binding Path=Note}"/>
+                        </GridView>
+                    </ListView.View>
+
+                </ListView>
+
+            </Grid>
+        </Grid>
+
+
+
+
+    </Grid>
+</Window>

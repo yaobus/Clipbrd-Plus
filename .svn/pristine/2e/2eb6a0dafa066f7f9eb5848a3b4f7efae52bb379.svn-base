@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Clipbrd_Plus.Welcome"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Clipbrd_Plus"
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <md:TransitioningContent x:Name="TransitioningContentMenu" OpeningEffect="{md:TransitionEffect SlideInFromLeft, Duration=0:0:0.3}" Grid.ColumnSpan="2" Grid.RowSpan="3">
+        <Grid Background="White">
+        <StackPanel>
+                <TextBlock Margin="45" Text="欢迎使用Clipboard Plus" FontSize="32" Foreground="#34b4c8" HorizontalAlignment="Center"></TextBlock>
+
+            <Image Width="200" Source="icon/ICON.ico" ></Image>
+
+            <TextBlock Margin="30" Text="Ver 1.0" FontSize="20" Foreground="#34b4c8" HorizontalAlignment="Center"></TextBlock>
+            <TextBlock Margin="0" Text="Copyright (C)Yaobus, All Rights Reserved." FontSize="20" Foreground="#34b4c8" HorizontalAlignment="Center"></TextBlock>
+
+        </StackPanel>
+
+    </Grid>
+        </md:TransitioningContent>
+</UserControl>

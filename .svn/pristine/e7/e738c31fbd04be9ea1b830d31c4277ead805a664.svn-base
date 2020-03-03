@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<packages>
+  <package id="MaterialDesignColors" version="1.2.2" targetFramework="net461" />
+  <package id="MaterialDesignThemes" version="3.0.1" targetFramework="net461" />
+  <package id="NHotkey" version="1.2.1" targetFramework="net472" />
+  <package id="NHotkey.Wpf" version="1.2.1" targetFramework="net472" />
+  <package id="SharpClipboard" version="3.3.0" targetFramework="net472" />
+  <package id="System.Data.SQLite.Core" version="1.0.112.0" targetFramework="net461" />
+</packages>
